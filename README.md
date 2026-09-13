@@ -4,7 +4,6 @@
 
 A portfolio project by Diogenes · CADCAMWise · 18+ years of CNC/CAM programming turned into code.
 
-![panel](docs/img/panel.png)
 
 > Not a finished product. This is a working lab where I explore how far NX CAM can be automated with NXOpen, and how a shop's own machining history can drive strategy and cost decisions. Everything runs inside Siemens NX 2406.
 
@@ -49,8 +48,6 @@ Details: [docs/STRUCTURE.md](docs/STRUCTURE.md) · [docs/CODING_STANDARDS.md](do
 
 Two write-ups came out of this project (Portuguese):
 
-- [*NXOpen CAM com C# — do journal ao produto*](docs/books/NXOpen_CAM_com_CSharp_PATHNC.pdf)
-- [*SQL Server na prática — do NX ao banco de dados*](docs/books/SQL_Server_na_Pratica_PATHNC.pdf)
 
 ## Tech stack
 
