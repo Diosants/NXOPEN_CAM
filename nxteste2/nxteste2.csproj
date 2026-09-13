@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>{8F3BB254-FCF2-4174-B42B-47B613D7029A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PATHNC</RootNamespace>
+    <AssemblyName>PATHNC</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <!-- ClickOnce: publica para o pendrive. MapFileExtensions=false mantem os nomes
+         originais (PATHNC.exe, nao PATHNC.exe.deploy), para o NX conseguir dar
+         Journal > Play direto na pasta "Application Files" sem instalar. -->
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <ManifestKeyFile>nxteste2_TemporaryKey.pfx</ManifestKeyFile>
+    <PublishUrl>D:\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>7F4DF0FE0BE7263083BF3EFABF4D8C69513A65E5</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Anthropic, Version=12.40.0.0, Culture=neutral, PublicKeyToken=f8f088d62f9f3514, processorArchitecture=MSIL">
+      <HintPath>..\packages\Anthropic.12.40.0\lib\netstandard2.0\Anthropic.dll</HintPath>
+    </Reference>
+    <Reference Include="Anthropic.SDK, Version=5.5.0.0, Culture=neutral, PublicKeyToken=964e90d2b32b1213, processorArchitecture=MSIL">
+      <HintPath>..\packages\Anthropic.SDK.5.10.0\lib\netstandard2.0\Anthropic.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.6\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.AI.Abstractions, Version=10.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.AI.Abstractions.10.5.1\lib\net462\Microsoft.Extensions.AI.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="NXOpen">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Siemens\NX2406\NXBIN\managed\NXOpen.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NXOpen.Guide">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Siemens\NX2406\NXBIN\managed\NXOpen.Guide.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NXOpen.UF">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Siemens\NX2406\NXBIN\managed\NXOpen.UF.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NXOpen.Utilities">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Siemens\NX2406\NXBIN\managed\NXOpen.Utilities.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NXOpenUI">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Siemens\NX2406\NXBIN\managed\NXOpenUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.8.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Pipelines, Version=10.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.10.0.6\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.ServerSentEvents, Version=10.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.ServerSentEvents.10.0.1\lib\net462\System.Net.ServerSentEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=10.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.10.0.6\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=10.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.10.0.6\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="3+2_CREATE_FEATURES\CREATE_BACK_FEATURE_GROUP.cs" />
+    <Compile Include="3+2_CREATE_FEATURES\CREATE_FRONT_FEATURE_GROUP.cs" />
+    <Compile Include="3+2_CREATE_FEATURES\CREATE_LEFT_FEATURE_GROUP.cs" />
+    <Compile Include="3+2_CREATE_FEATURES\CREATE_RIGHT_FEATURE_GROUP.cs" />
+    <Compile Include="3+2_CREATE_FEATURES\CREATE_TOP_FEATURE_GROUP.cs" />
+    <Compile Include="3+2_FBM_BACK_TOOLPATHS -\BACK_PLANAR_SURFACE_FINISH_PLANAR.cs" />
+    <Compile Include="3+2_FBM_BACK_TOOLPATHS -\BACK_PLANAR_SURFACE_FINISH_WALL.cs" />
+    <Compile Include="3+2_FBM_BACK_TOOLPATHS -\BACK_PLANAR_SURFACE_ROUGH.cs" />
+    <Compile Include="3+2_FBM_TOP_TOOLPATHS - - -\TOP_PLANAR_SURFACE_FINISH_PLANAR.cs" />
+    <Compile Include="3+2_FBM_TOP_TOOLPATHS - - -\TOP_PLANAR_SURFACE_ROUGH.cs" />
+    <Compile Include="3+2_FBM_TOP_TOOLPATHS - - -\TOP_PLANNAR_SURFACE_FINISH_WALL.cs" />
+    <Compile Include="3+2_FBM_RIGHT_TOOLPATHS - -\RIGHT_PLANAR_SURFACE_FINISH_PLANAR.cs" />
+    <Compile Include="3+2_FBM_RIGHT_TOOLPATHS - -\RIGHT_PLANNAR_SURFACE_FINISH_WALL.cs" />
+    <Compile Include="3+2_FBM_RIGHT_TOOLPATHS - -\RIGHT_PLANAR_SURFACE_ROUGH.cs" />
+    <Compile Include="3+2_FBM_LEFT_TOOLPATHS -\LEFT_PLANAR_SURFACE_FINISH_PLANAR.cs" />
+    <Compile Include="3+2_FBM_LEFT_TOOLPATHS -\LEFT_PLANAR_SURFACE_FINISH_WALL.cs" />
+    <Compile Include="3+2_FBM_LEFT_TOOLPATHS -\LEFT_PLANAR_SURFACE_ROUGH.cs" />
+    <Compile Include="3+2_RECONGINIZE_FEATURES\BACK_RECOGNIZE_FEATURE.cs" />
+    <Compile Include="3+2_RECONGINIZE_FEATURES\FRONT_RECOGNIZE_FEATURE.cs" />
+    <Compile Include="3+2_RECONGINIZE_FEATURES\LEFT_RECOGNIZE_FEATURE.cs" />
+    <Compile Include="3+2_RECONGINIZE_FEATURES\RIGHT_RECOGNIZE_FEATURE.cs" />
+    <Compile Include="3+2_RECONGINIZE_FEATURES\TOP_RECOGNIZE_FEATURE.cs" />
+    <Compile Include="3+2_TOOLPATHS\BACK_5X_ZLEVEL_SEMI_FINISH.cs" />
+    <Compile Include="3+2_TOOLPATHS\CAVITY_MILL_BACK.cs" />
+    <Compile Include="3+2_TOOLPATHS\CAVITY_MILL_FRONT.cs" />
+    <Compile Include="3+2_TOOLPATHS\CAVITY_MILL_LEFT.cs" />
+    <Compile Include="3+2_TOOLPATHS\CAVITY_MILL_RIGHT.cs" />
+    <Compile Include="3+2_TOOLPATHS\CAVITY_MILL_TOP.cs" />
+    <Compile Include="3+2_TOOLPATHS\CRIAR_PASTA_ROUGH_3+2.cs" />
+    <Compile Include="3+2_TOOLPATHS\FRONT_5X_ZLEVEL_SEMI_FINISH.cs" />
+    <Compile Include="3+2_TOOLPATHS\LEFT_5X_ZLEVEL_SEMI_FINISH.cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_CUTTER_16MM_BACK.cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_CUTTER_16MM_FRONT.cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_CUTTER_16MM_LEFT.cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_CUTTER_16MM_RIGHT.cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_CUTTER_16MM_TOP.cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_ENDMILL_8MM_BACK .cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_ENDMILL_8MM_FRONT .cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_ENDMILL_8MM_LEFT.cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_ENDMILL_8MM_RIGHT .cs" />
+    <Compile Include="3+2_TOOLPATHS\REST_MILL_ENDMILL_8MM_TOP .cs" />
+    <Compile Include="3+2_FBM_FRONT_TOOLPATHS\FRONT_PLANAR_SURFACE_ROUGH.cs" />
+    <Compile Include="3+2_FBM_FRONT_TOOLPATHS\FRONT_PLANAR_SURFACE_FINISH_PLANAR.cs" />
+    <Compile Include="3+2_FBM_FRONT_TOOLPATHS\FRONT_PLANAR_SURFACE_FINISH_WALL.cs" />
+    <Compile Include="3+2_TOOLPATHS\RIGHT_5X_ZLEVEL_SEMI_FINISH.cs" />
+    <Compile Include="3+2_TOOLPATHS\TOP_5X_ZLEVEL_SEMI_FINISH.cs" />
+    <Compile Include="3D_ADAPTIVE_MILL\BACK_ADAPTIVE_MILL.cs" />
+    <Compile Include="3D_ADAPTIVE_MILL\FRONT_ADAPTIVE_MILL.cs" />
+    <Compile Include="3D_ADAPTIVE_MILL\LEFT_ADAPTIVE_MILL.cs" />
+    <Compile Include="3D_ADAPTIVE_MILL\RIGHT_ADAPTIVE_MILL.cs" />
+    <Compile Include="3D_ADAPTIVE_MILL\TOP_ADAPTIVE_MILL.cs" />
+    <Compile Include="3X MILL MACHINES\THREE_AXIS_MILLING_FANUC.cs" />
+    <Compile Include="3X MILL MACHINES\THREE_AXIS_MILLING_GENERIC.cs" />
+    <Compile Include="3X MILL MACHINES\THREE_AXIS_MILLING_HEIDENHAIN.cs" />
+    <Compile Include="3X MILL MACHINES\THREE_AXIS_MILLING_SIEMENS.cs" />
+    <Compile Include="3X MILL TOOLPATHS\CAVITY_MILL_3X_MACHINE.cs" />
+    <Compile Include="3X MILL TOOLPATHS\CONTOUR_AREA.cs" />
+    <Compile Include="3X MILL TOOLPATHS\DEBURR.cs" />
+    <Compile Include="3X MILL TOOLPATHS\FACING.cs" />
+    <Compile Include="3X MILL TOOLPATHS\HOLE_H7.cs" />
+    <Compile Include="3X MILL TOOLPATHS\RASTER.cs" />
+    <Compile Include="3X MILL TOOLPATHS\WALL_ROUGH.cs" />
+    <Compile Include="3X MILL TOOLPATHS\ZLEVEL_PROFILE.cs" />
+    <Compile Include="AI_Assistent\AnthropicClient.cs" />
+    <Compile Include="AI_Assistent\ApiKeyPromptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AI_Assistent\ApiKeyStore.cs" />
+    <Compile Include="AI_Assistent\ChatAssistantForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Aicopilotservice.cs" />
+    <Compile Include="AI_COPILOT_MODELS\Copilotresultform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PartSignatureExtractor.cs" />
+    <Compile Include="PartSignaturerecord.cs" />
+    <Compile Include="PartSignaturerepository.cs" />
+    <Compile Include="QUOTES\Quoteforms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QUOTES\Quoteservice.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\ShopDocDatabase.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\SHOP_DOCUMENTATION_DE.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\SHOP_DOCUMENTATION_EN.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\SHOP_DOCUMENTATION_ES.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\SHOP_DOCUMENTATION_FR.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\SHOP_DOCUMENTATION_NL.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\SHOP_DOCUMENTATION_PT.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\SHOP_DOCUMENTATION_TR.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\SHOP_DOCUMENTATION_ZH.cs" />
+    <Compile Include="SHOP_DOCUMENTATION\StrategyHistoryService.cs" />
+    <Compile Include="SimilarityCalculator.cs" />
+    <Compile Include="AUTODRILL_CICLO_COMPLETO\AUTODRILL_GEOMETRIA_PROPRIA.cs" />
+    <Compile Include="AUTODRILL_CICLO_COMPLETO\AutoDrillSummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AUTOMATIC_DRILL\AUTOMATIC_CENTER_DRILL.cs" />
+    <Compile Include="AUTOMATIC_DRILL\AUTOMATIC_COUNTERBORE.cs" />
+    <Compile Include="AUTOMATIC_DRILL\CREATE_GROUP_FEATURES.cs" />
+    <Compile Include="AUTOMATIC_DRILL\FG_CENTER_DRILL_ALL_HOLES.cs" />
+    <Compile Include="AUTOMATIC_DRILL\FG_PECK_DRILL_ALL_HOLES.cs" />
+    <Compile Include="AUTOMATIC_DRILL\RECOGNIZE_FEATURES.cs" />
+    <Compile Include="AUTOMATIC_POCKETS_MACHINED\CREATE_ONLY_POCKETS.cs" />
+    <Compile Include="AUTOMATIC_POCKETS_MACHINED\FIND_ONLY_POCKETS.cs" />
+    <Compile Include="AUTOMATIC_SOCKET_HEAD\M10_SOCKET_HEAD.cs" />
+    <Compile Include="AUTOMATIC_SOCKET_HEAD\M12_SOCKET_HEAD.cs" />
+    <Compile Include="AUTOMATIC_SOCKET_HEAD\M16_SOCKET_HEAD.cs" />
+    <Compile Include="AUTOMATIC_SOCKET_HEAD\M20_SOCKET_HEAD.cs" />
+    <Compile Include="AUTOMATIC_SOCKET_HEAD\M24_SOCKET_HEAD.cs" />
+    <Compile Include="AUTOMATIC_TAP\M10.cs" />
+    <Compile Include="AUTOMATIC_TAP\M12.cs" />
+    <Compile Include="AUTOMATIC_TAP\M14.cs" />
+    <Compile Include="AUTOMATIC_TAP\M16.cs" />
+    <Compile Include="AUTOMATIC_TAP\M18.cs" />
+    <Compile Include="AUTOMATIC_TAP\M20.cs" />
+    <Compile Include="AUTOMATIC_TAP\M6.cs" />
+    <Compile Include="AUTOMATIC_TAP\M8.cs" />
+    <Compile Include="BLOCK_UI_STYLER_TOOLPATHS\RASTERINTERACTIVE.cs" />
+    <Compile Include="BLOCK_UI_STYLER_TOOLPATHS\ROUGHINTERACTIVE.cs" />
+    <Compile Include="BLOCK_UI_STYLER_TOOLPATHS\ZLEVELINTERACTIVE.cs" />
+    <Compile Include="COUNTERBORE_STANDARD\CTBORE_STANDARD_DIAMETER_3_FINISH.cs" />
+    <Compile Include="COUNTERBORE_STANDARD\CTBORE_STANDARD_DIAMETER_2_FINISH .cs" />
+    <Compile Include="COUNTERBORE_STANDARD\CTBORE_STANDARD_DIAMETER_3_ROUGH .cs" />
+    <Compile Include="COUNTERBORE_STANDARD\CTBORE_STANDARD_TMAX_DRILL.cs" />
+    <Compile Include="COUNTERBORE_STANDARD\CTBORE_STANDARD_DIAMETER_1_ROUGH.cs" />
+    <Compile Include="COUNTERBORE_STANDARD\CTBORE_STANDARD_DIAMETER_2_ROUGH.cs" />
+    <Compile Include="COUNTERBORE_STANDARD\CTBORE_STANDARD_DIAMETER_1_FINISH.cs" />
+    <Compile Include="COUNTERBORE_STANDARD\WIZARD_CTBORE_STANDARD.cs" />
+    <Compile Include="DEBURING\TOP_PLANAR_DEBUR_DIAM_12MM.cs" />
+    <Compile Include="AUTOMATIC_DRILL\ALL_THREADS_COUNTERSINK.cs" />
+    <Compile Include="DRILLING\CBORE_MILL.cs" />
+    <Compile Include="DRILLING\CHAMFER_MILLING_.cs" />
+    <Compile Include="DRILLING\CSINK.cs" />
+    <Compile Include="DRILLING\CTBORE_MILLING.cs" />
+    <Compile Include="DRILLING\BLIND_PECK_DRILL.cs" />
+    <Compile Include="DRILLING\CENTER_DRILL_TOP_BLOCK.cs" />
+    <Compile Include="AUTOMATIC_DRILL\DRILL_AND_TAP_COMBINED.cs" />
+    <Compile Include="DRILLING\FURO_CENTRO_CTBORE.cs" />
+    <Compile Include="DRILLING\FURO_CENTRO_PASSANTE.cs" />
+    <Compile Include="DRILLING\FURO_CTBORE_MODEL_DEPTH_PICA_PAU - Copia.cs" />
+    <Compile Include="DRILLING\FURO_CTBORE_PASSANTE_PICA_PAU.cs" />
+    <Compile Include="DRILLING\THROUGH_PECK_DRILL_WEDM_ROUND_STRAIGHT - Copy.cs" />
+    <Compile Include="DRILLING\FG_STEP2HOLE_THROUGH.cs" />
+    <Compile Include="DRILLING\THROUGH_PECK_DRILL.cs" />
+    <Compile Include="ENCONTRAR_FUROS\FIND_ALL_HOLES_BY_DIAMETER.cs" />
+    <Compile Include="ENCONTRAR_FUROS\FIND_ALL_HOLES_CENTER_DRILL.cs" />
+    <Compile Include="ENCONTRAR_FUROS\FIND_ALL_HOLES_PECK_DRILL.cs" />
+    <Compile Include="Database\ToolDatabase.cs" />
+    <Compile Include="Database\ToolDatabaseManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FACTORY\OperationFactory.cs" />
+    <Compile Include="FBM AUTODRILL COMPLETE CYCLE\FBM_AUTODRILL_COMPLETE_CYCLE.cs" />
+    <Compile Include="FBM_ALL_FEATURES\FBM_ALL_FEATURES_MACHINED.cs" />
+    <Compile Include="FBM_CORNER_NOTCH_STRAIGHT\CREATE_FOLDER_NOTCH_STRAIGHT.cs" />
+    <Compile Include="FBM_CORNER_NOTCH_STRAIGHT\FBM_CORNER_NOTCH_STRAIGHT_FLOOR_FINISH.cs" />
+    <Compile Include="FBM_CORNER_NOTCH_STRAIGHT\FBM_CORNER_NOTCH_STRAIGHT_ROUGH.cs" />
+    <Compile Include="FBM_CORNER_NOTCH_STRAIGHT\FBM_CORNER_NOTCH_STRAIGHT_WALL_FINISH.cs" />
+    <Compile Include="FBM_CORNER_NOTCH_STRAIGHT\WIZARD_CORNER_NOTCH_STRAIGHT.cs" />
+    <Compile Include="FBM_FACEAMENTO\USINAGEM_FACE_ACABAMENTO.cs" />
+    <Compile Include="FBM_FACEAMENTO\USINAGEM_FACE_DESBASTE.cs" />
+    <Compile Include="FBM_HOLE_RECTANGULAR_STRAIGHT\FBM_HOLE_RECTANGULAR_STRAIGHT_ROUGH_CAB16.cs" />
+    <Compile Include="FBM_HOLE_RECTANGULAR_STRAIGHT\FBM_HOLE_RECTANGULAR_STRAIGHT_FINISH_WALL_TOPO_10.cs" />
+    <Compile Include="FBM_HOLE_RECTANGULAR_STRAIGHT\WIZARD_HOLE_RECTANGULAR_STRAIGHT.cs" />
+    <Compile Include="FBM_MOLD_COUNTERBORE_MACHINING\USINAGEM_FIGURA_COLUNA_OP_01_DIAM_42_48_TMAX_D30MM.cs" />
+    <Compile Include="FBM_MOLD_COUNTERBORE_MACHINING\USINAGEM_FIGURA_COLUNA_OP_02_DESB_DIAM_42_CAB_25.cs" />
+    <Compile Include="FBM_MOLD_COUNTERBORE_MACHINING\USINAGEM_FIGURA_COLUNA_OP_03_DESB_DIAM_48_CAB_25.cs" />
+    <Compile Include="FBM_MOLD_COUNTERBORE_MACHINING\USINAGEM_FIGURA_COLUNA_OP_04_ACAB_DIAM_48_TOPO10.cs" />
+    <Compile Include="FBM_MOLD_COUNTERBORE_MACHINING\USINAGEM_FIGURA_COLUNA_OP_05_MANDRILHAMENTO_DIAM_42.cs" />
+    <Compile Include="FBM_MOLD_COUNTERBORE_MACHINING\WIZARD_CBORE_MOLD.cs" />
+    <Compile Include="FBM_OPEN_POCKET_MACHINING\USINAGEM_FIGURA_PARCIAL_RECTANGULAR_POCKET_CAB16.cs" />
+    <Compile Include="FBM_OPEN_POCKET_MACHINING\USINAGEM_FIGURA_PARCIAL_RECTANGULAR_POCKET_OP2_ACAB_PERFIL_TOPO_10.cs" />
+    <Compile Include="FBM_OPEN_POCKET_MACHINING\USINAGEM_FIGURA_PARCIAL_RECTANGULAR_POCKET_OP3_ACAB_AREA_PLANA_TOPO10.cs" />
+    <Compile Include="FBM_PLANAR_RECTANGULAR\FBM_RECTANGULAR_PLANAR_FINISH.cs" />
+    <Compile Include="FBM_PLANAR_RECTANGULAR\FBM_RECTANGULAR_PLANAR_ROUGH.cs" />
+    <Compile Include="FBM_PLANAR_ROUND\FBM_PLANAR_ROUND_FLOOR_FINISH.cs" />
+    <Compile Include="FBM_PLANAR_ROUND\FBM_PLANAR_ROUND_ROUGH.cs" />
+    <Compile Include="FBM_PLANAR_ROUND\FBM_PLANAR_ROUND_WALL_FINISH.cs" />
+    <Compile Include="FBM_PLANAR_SURFACE\FBM_PLANAR_SURFACE_ROUGH.cs" />
+    <Compile Include="FBM_PLANAR_SURFACE\FBM_PLANAR_SURFACE_FLOOR_FINISH.cs" />
+    <Compile Include="FBM_PLANAR_SURFACE\FBM_PLANAR_SURFACE_WALL_FINISH.cs" />
+    <Compile Include="FBM_POCKET_OBROUND_STRAIGHT\FBM_POCKET_OBROUND_STRAIGHT_FLOOR_FINISH.cs" />
+    <Compile Include="FBM_POCKET_OBROUND_STRAIGHT\FBM_POCKET_OBROUND_STRAIGHT_ROUGH.cs" />
+    <Compile Include="FBM_POCKET_OBROUND_STRAIGHT\FBM_POCKET_OBROUND_STRAIGHT_WALL_FINISH.cs" />
+    <Compile Include="FBM_POCKET_OPEN\FBM_POCKET_OPEN_FLOOR_FINISH.cs" />
+    <Compile Include="FBM_POCKET_OPEN\FBM_POCKET_OPEN_ROUGH.cs" />
+    <Compile Include="FBM_POCKET_OPEN\FBM_POCKET_OPEN_WALL_FINISH.cs" />
+    <Compile Include="FBM_RECTANGULAR_POCKET_MACHINING\FBM_RECTANGULAR_POCKET_FLOOR_FINISH.cs" />
+    <Compile Include="FBM_RECTANGULAR_POCKET_MACHINING\FBM_RECTANGULAR_POCKET_WALL_FINISH.cs" />
+    <Compile Include="FBM_RECTANGULAR_POCKET_MACHINING\FBM_RECTANGULAR_POCKET_ROUGH.cs" />
+    <Compile Include="FBM_RECTANGULAR_POCKET_MACHINING\FBM_RECTANGULAR_POCKET_REST_MILL.cs" />
+    <Compile Include="FBM_SLOT_PARTIAL_RECTANGULAR\FBM_SLOT_PARTIAL_RECTANGULAR_ROUGH.cs" />
+    <Compile Include="FBM_SLOT_PARTIAL_RECTANGULAR\FBM_SLOT_PARTIAL_RECTANGULAR_FLOOR_FINISH.cs" />
+    <Compile Include="FBM_SLOT_PARTIAL_RECTANGULAR\FBM_SLOT_PARTIAL_RECTANGULAR_WALL_FINISH.cs" />
+    <Compile Include="FBM_SLOT_PARTIAL_RECTANGULAR\WIZARD_SLOT_PARTIAL_RECTANGULAR.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ACHAR-CRIAR-FUROS-PASSANTES.cs" />
+    <Compile Include="Helpers\CREATE_ALL_FEATURES_GROUP.cs" />
+    <Compile Include="Helpers\CRIAR_PASTA.cs" />
+    <Compile Include="Helpers\DrillingHelper.cs" />
+    <Compile Include="Helpers\FEATUREGROUP_BOLSAO_CIRCULAR.cs" />
+    <Compile Include="Helpers\FEATUREGROUP_COUNTERBORE.cs" />
+    <Compile Include="Helpers\FEATUREGROUP_FURO_PASSANTE.cs" />
+    <Compile Include="Helpers\FEATUREGROUP_POCKET_RECTANGULAR_STRAIGHT.cs" />
+    <Compile Include="Helpers\FEATUREGROUP_ROSCA.cs" />
+    <Compile Include="Helpers\FEATUREGROUP_SUPERFICIE_PLANA_RETANGULAR.cs" />
+    <Compile Include="Helpers\FINDBLINDHOLE.cs" />
+    <Compile Include="Helpers\FINDCOUNTERBORE.cs" />
+    <Compile Include="Helpers\FINDPLANARSURFACE.cs" />
+    <Compile Include="Helpers\FINDTHREAD.cs" />
+    <Compile Include="Helpers\FINDTHROUGHOLE.cs" />
+    <Compile Include="Helpers\FIND_ALL_FEATURES.cs" />
+    <Compile Include="Helpers\FUCACAO-PASSANTE-AUTOMATICA.cs" />
+    <Compile Include="Helpers\FURO-CENTRO - DUAS-OPERACOES.cs" />
+    <Compile Include="Helpers\FURO-CENTRO - PICA-PAU.cs" />
+    <Compile Include="Helpers\FURO-CENTRO.cs" />
+    <Compile Include="Helpers\GRUPO_DE_FIGURA.cs" />
+    <Compile Include="Helpers\LISTAR_FEATURE_GROUP.cs" />
+    <Compile Include="Helpers\OperationHelper.cs" />
+    <Compile Include="Helpers\PICA_PAU.cs" />
+    <Compile Include="HOLE_DIAMETER_COLORIZER\COLOR_HOLES_BY_CATEGORY_TEST.cs" />
+    <Compile Include="HOLE_DIAMETER_COLORIZER\HoleDiameterColorizer.cs" />
+    <Compile Include="INTERACTIVE_TOOLPATHS\CREATE_TOOL.cs" />
+    <Compile Include="INTERACTIVE_TOOLPATHS\FINISHINGFACE.cs" />
+    <Compile Include="INTERACTIVE_TOOLPATHS\RASTERINTERACTIVE.cs" />
+    <Compile Include="INTERACTIVE_TOOLPATHS\ROUGHINTERACTIVE.cs" />
+    <Compile Include="INTERACTIVE_TOOLPATHS\ZLEVELINTERACTIVE.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="MOLD WIZARD\MOLDFINISHWALL_FLOOR_ENDMILL_D10MM.cs" />
+    <Compile Include="MOLD WIZARD\MOLDFINISH_PROFILE.cs" />
+    <Compile Include="MOLD WIZARD\MOLDRESTMILL_ENDMILL_D12MM.cs" />
+    <Compile Include="MOLD WIZARD\MOLDRESTMILL_ENDMILL_D10MM.cs" />
+    <Compile Include="MOLD WIZARD\MOLDRESTMILL_CUTTER_D16_R8.cs" />
+    <Compile Include="MOLD WIZARD\MOLDRESTMILL_CUTTER_D25_R8.cs" />
+    <Compile Include="MOLD WIZARD\MOLDROUGHSTRATEGY.cs" />
+    <Compile Include="MOLD WIZARD\MOLDROUGHSTRATEGYBLOCKSTYLE.cs" />
+    <Compile Include="MOLD WIZARD\MOLD_ALTO_CICLE_ROUGH_FINISH.cs" />
+    <Compile Include="MOLD WIZARD\MOLD_CORNER_RELIEF.cs" />
+    <Compile Include="MOLD WIZARD\MOLD_FINISH_FLOOR_WALL.cs" />
+    <Compile Include="MOLD WIZARD\MOLD_WIZARD_FINISH.cs" />
+    <Compile Include="MOLD WIZARD\MOLD_WIZARD_REST_MILL.cs" />
+    <Compile Include="MOLD WIZARD\MOLD_WIZARD_ROUGH.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="SIMULATION\Simulation.cs" />
+    <Compile Include="Strategies\BlindPeckDrillStrategy.cs" />
+    <Compile Include="Strategies\CboreMillStrategy.cs" />
+    <Compile Include="Strategies\CenterDrillTopBlockStrategy.cs" />
+    <Compile Include="Strategies\ChamferMillingStrategy.cs" />
+    <Compile Include="Strategies\CSinkStrategy.cs" />
+    <Compile Include="Strategies\IP1Strategy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategies\ClosedPocketStrategy.cs" />
+    <Compile Include="Strategies\CounterBoreStrategy.cs" />
+    <Compile Include="Strategies\IMachiningStrategy.cs" />
+    <Compile Include="Strategies\M10SocketHeadStrategy.cs" />
+    <Compile Include="Strategies\M10TapStrategy.cs" />
+    <Compile Include="Strategies\M12SocketHeadStrategy.cs" />
+    <Compile Include="Strategies\M12TapStrategy.cs" />
+    <Compile Include="Strategies\M14TapStrategy.cs" />
+    <Compile Include="Strategies\M16SocketHeadStrategy.cs" />
+    <Compile Include="Strategies\M16TapStrategy.cs" />
+    <Compile Include="Strategies\M18TapStrategy.cs" />
+    <Compile Include="Strategies\M20SocketHeadStrategy.cs" />
+    <Compile Include="Strategies\M20TapStrategy.cs" />
+    <Compile Include="Strategies\M24SocketHeadStrategy.cs" />
+    <Compile Include="Strategies\M6TapStrategy.cs" />
+    <Compile Include="Strategies\M8TapStrategy.cs" />
+    <Compile Include="Strategies\MachiningContext.cs" />
+    <Compile Include="Strategies\OpenPocketStrategy.cs" />
+    <Compile Include="Strategies\P1PlateStrategy.cs" />
+    <Compile Include="Strategies\PlanarSurface.cs" />
+    <Compile Include="Strategies\PlanarFaceStrategy.cs" />
+    <Compile Include="Strategies\SurfaceStrategy.cs" />
+    <Compile Include="Strategies\ThroughPeckDrillStrategy.cs" />
+    <Compile Include="Strategyapplier.cs" />
+    <Compile Include="TEMPLATES_3+2\TEMPLATE_3+2_EXAMPLE_01.cs" />
+    <Compile Include="TEMPLATES_3+2\THREE_PLUS_TWO_COMMON.cs" />
+    <Compile Include="TEMPLATES_3+2\THREE_PLUS_TWO_ROUGH.cs" />
+    <Compile Include="TEMPLATES_3+2\THREE_PLUS_TWO_REST_MILL.cs" />
+    <Compile Include="TEMPLATES_3+2\THREE_PLUS_TWO_SEMI_FINISH.cs" />
+    <Compile Include="TEMPLATES_3+2\THREE_PLUS_TWO_PIPELINE.cs" />
+    <Compile Include="TESTE.cs" />
+    <Compile Include="Theme.cs" />
+    <Compile Include="Tool Library\ToolLibraryFromNX.cs" />
+    <Compile Include="VISES_FIXTURES\ALIGN_VISE.cs" />
+    <Compile Include="VISES_FIXTURES\GetVise.cs" />
+    <Compile Include="VISES_FIXTURES\ImportViseComponent.cs" />
+    <Compile Include="VISES_FIXTURES\LoadAndAlignCenteredVise_Auto.cs" />
+    <Compile Include="VISES_FIXTURES\LoadAndAlignVise_Auto.cs" />
+    <Compile Include="VISES_FIXTURES\TEST_IMPORT_MORSA_C_BASE_01.cs" />
+    <Compile Include="WORKPLANES\BACK_VIEW.cs" />
+    <Compile Include="WORKPLANES\FRONT_VIEW.cs" />
+    <Compile Include="WORKPLANES\LEFT_VIEW.cs" />
+    <Compile Include="WORKPLANES\RIGHT_VIEW.cs" />
+    <Compile Include="WORKPLANES\TOP_VIEW.cs" />
+    <Compile Include="workPart\CAMSetup.cs" />
+    <Compile Include="WORKPLANES\WORKPLANE_BOTTOM_BLOCK -.cs" />
+    <Compile Include="WORKPLANES\WORKPLANE_TOP_BLOCK.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="nxteste2_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <!-- Copiado para a saida so quando existir na raiz do projeto (nao quebra o build se faltar) -->
+    <None Include="PathNCAutomationDB.connection" Condition="Exists('PathNCAutomationDB.connection')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AI_Assistent\ChatAssistantForm.resx">
+      <DependentUpon>ChatAssistantForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QUOTES\Quoteforms.resx">
+      <DependentUpon>Quoteforms.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AI_SUGGESTION_REPOSITORY\" />
+    <Folder Include="COUNTERBORE_STANDARD\FBM_HOLE_RECTANGULAR_STRAIGHT\" />
+    <Folder Include="MOLD PLATES\P1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CAVITY_MILL.dlx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\day_one_setup_vice_assmbly.prt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\xmag_search_find_export_locate_5984.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2026-07-03 183052.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2026-07-03 200950.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2026-07-07 194539.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2026-07-11 085227.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2026-07-12 100257.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CORNER_NOTCH_STRAIGHT.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\COUNTERBORE_ROLAMENTO.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\ZLEVEL_ZIGZAG_AREA_ABERTA.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets'))" />
+  </Target>
+</Project>
